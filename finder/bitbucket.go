@@ -105,7 +105,7 @@ func (bb Bb) Search(kw string) ([]BbSearchRes, error) {
                         z.Next()
                         content := z.Token()
                         num, err := strconv.Atoi(content.Data)
-                        if err == nil && num > pages {
+                        if err == nil && num > pages && num <= 10 { // limit the maximum results to 10 pages
                             pages = num
                         }
                     }
