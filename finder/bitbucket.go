@@ -21,6 +21,9 @@ type BbSearchRes struct {
 
 type Bb struct{}
 
+/*
+   It takes too much time to extract a real avatar url, so use it on your own risk
+*/
 func BbAvatar(username string) (string) {
     r, err := http.Get(BbUrl + username)
     if err != nil {
@@ -102,7 +105,7 @@ func (bb Bb) Search(kw string) ([]BbSearchRes, error) {
                         z.Next()
                         content := z.Token()
                         num, err := strconv.Atoi(content.Data)
-                        if err == nil && num > pages { // 2 pages for test
+                        if err == nil && num > pages {
                             pages = num
                         }
                     }
