@@ -8,8 +8,10 @@ import (
     "strings"
 )
 
-const BbUrl = "https://bitbucket.org/"
-const BbSearchUrl = "repo/all/relevance/"
+const BbUrl         = "https://bitbucket.org/"
+const BbSearchUrl   = "repo/all/relevance/"
+const maxPages      = 10
+const useRealAvatar = false
 
 type BbSearchRes struct {
     Title  string
@@ -84,8 +86,10 @@ func (bb Bb) Search(kw string) ([]BbSearchRes, error) {
                                         repo.Title = content.Data
                                     }
                                 case "img":
-                                    //username := strings.Split(child.Attr[0].Val, "/")[0]
-                                    repo.Avatar = "" //BbAvatar(username)
+                                    username := strings.Split(child.Attr[0].Val, "/")[0]
+                                    if useRealAvatar {
+                                        repo.Avatar = BbAvatar(username)
+                                    }
                                     if len(repo.Avatar) == 0 {
                                         repo.Avatar = child.Attr[1].Val
                                     }
@@ -105,7 +109,7 @@ func (bb Bb) Search(kw string) ([]BbSearchRes, error) {
                         z.Next()
                         content := z.Token()
                         num, err := strconv.Atoi(content.Data)
-                        if err == nil && num > pages && num <= 10 { // limit the maximum results to 10 pages
+                        if err == nil && num > pages && num <= maxPages {
                             pages = num
                         }
                     }
