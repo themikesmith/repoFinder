@@ -1,0 +1,53 @@
+@bgcolor:   rgba(50,50,50, 0.2);
+@infocolor: rgba(210,210,210, 0.4);
+@ctcolor:   rgba(255,255,255, 0.8);
+@edge:      5px;
+
+html, body{
+  width: 100%;
+  height: 100%;
+}
+
+body {
+  text-align: center;
+}
+.base {
+  padding: 50px;
+  margin: 10px;
+  background-color: @bgcolor;
+  border-radius: @edge;
+}
+.content {
+  margin: 10px;
+  background-color: @ctcolor;
+  border-radius: @edge;
+  overflow: scroll;
+  padding: 10px;
+}
+.searchInput {
+  width: 200px;
+}
+.inline {
+  display: inline-flex;
+  //background-color: green;
+}
+.info {
+  display: inline-flex;
+  width: 500px;
+  text-align: left;
+  padding: 3px;
+}
+img.avatar {
+  width: 60px;
+  height: 60px;
+}
+a.link {
+  font-size: 20px;
+  padding-top: 12px;
+}
+.odd {
+  background-color: @infocolor;
+}
+.even {
+
+}
