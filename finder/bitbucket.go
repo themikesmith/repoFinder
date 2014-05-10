@@ -14,11 +14,12 @@ const maxPages      = 10
 const useRealAvatar = false
 
 type BbSearchRes struct {
-    Title  string
-    Url    string
-    Date   string
-    Lang   []string
-    Avatar string
+    Title         string
+    Description   string
+    Url           string
+    Date          string
+    Lang          []string
+    Avatar        string
 }
 
 type Bb struct{}
@@ -98,6 +99,10 @@ func (bb Bb) Search(kw string) ([]BbSearchRes, error) {
                                     repo.Lang = append(repo.Lang, lang)
                                 case "time":
                                     repo.Date = child.Attr[0].Val
+                                case "p":
+                                    z.Next()
+                                    content := z.Token()
+                                    repo.Description = content.Data
                                 }
                             }
                         }
