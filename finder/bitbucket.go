@@ -81,7 +81,7 @@ func (bb Bb) Search(kw string) ([]BbSearchRes, error) {
                                 switch child.Data {
                                 case "a":
                                     if len(child.Attr) == 2 && child.Attr[0].Val == "repo-link" {
-                                        repo.Url = BbUrl + child.Attr[1].Val[1:len(child.Attr[1].Val)-1]
+                                        repo.Url = BbUrl + child.Attr[1].Val[1:]
                                         z.Next()
                                         content := z.Token()
                                         repo.Title = content.Data
