@@ -6,6 +6,7 @@ Find repositories among many kind of source code hosting sites in JSON format
 
 ## Backend API: ##
 * Bitbucket search: `/BbSearch/(keyword)`
+* Gitorious search: `/GrSearch/(keyword)`
 * ...to be added
 
 
