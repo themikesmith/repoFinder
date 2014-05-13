@@ -50,13 +50,14 @@ func BbAvatar(username string) (string) {
     return ""
 }
 
-func (bb Bb) Search(kw string) ([]BbSearchRes, error) {
+func (bb Bb) Search(kw string) (int, []BbSearchRes, error) {
     var res []BbSearchRes
     pages := 1
+    total_count := 0
     for i := 1; i <= pages; i++ {
         r, err := http.Get(BbUrl + BbSearchUrl + strconv.Itoa(i) + "?name=" + kw)
         if err != nil {
-            return res, err
+            return total_count, res, err
         }
         defer r.Body.Close()
         z := html.NewTokenizer(r.Body)
@@ -119,9 +120,27 @@ func (bb Bb) Search(kw string) ([]BbSearchRes, error) {
                         }
                     }
                     break
+                case "section":
+                    if len(token.Attr) > 0 && token.Attr[0].Val == "repo-list" {
+                      for {
+                        z.Next()
+                        token := z.Token()
+                        if token.Type == html.StartTagToken && token.Data == "h1" {
+                          z.Next()
+                          content := z.Token()
+                          num, err := strconv.Atoi(strings.Split(strings.Trim(content.Data, " \t\n"), " ")[1])
+                          if err == nil {
+                            total_count = num
+                          }
+                          break
+                        }
+                      }
+                    }
+                    break
+
                 }
             }
         }
     }
-    return res, nil
+    return total_count, res, nil
 }

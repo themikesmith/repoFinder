@@ -13,10 +13,10 @@ var gr finder.Gr
 func bbHandler(w http.ResponseWriter, r *http.Request) {
     w.Header().Add("Access-Control-Allow-Origin", "*")
     kw := r.URL.Path[len("/BbSearch/"):]
-    res, err := bb.Search(kw)
+    count, res, err := bb.Search(kw)
     if err == nil {
-        b, _ := json.MarshalIndent(res, "", "  ")
-        fmt.Fprintf(w, "%s", b)
+        b, _ := json.MarshalIndent(res, "", "    ")
+        fmt.Fprintf(w, `{"total_count": %d, "items": %s}`, count, b)
     }
 }
 
