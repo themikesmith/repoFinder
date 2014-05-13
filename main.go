@@ -31,6 +31,7 @@ func grHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func main() {
+    http.Handle("/", http.FileServer(http.Dir("./www/")))
     http.HandleFunc("/BbSearch/", bbHandler)
     http.HandleFunc("/GrSearch/", grHandler)
     http.ListenAndServe(":8080", nil)

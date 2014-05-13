@@ -1,0 +1,30 @@
+<div class="InfoAndOpts">
+  <div class="container" ng-show="resShow">
+    <div class="row">
+      <div class="col-md-2 col-md-offset-3 Github"><i class="fa fa-github-square fa-fw"></i>Github: {{res.gitCount}}</div>
+      <div class="col-md-2 Bitbucket"><i class="fa fa-bitbucket-square fa-fw"></i>Bitbucket: {{res.bbCount}}</div>
+      <div class="col-md-2 Gitorious"><i class=""></i>Gitorious: {{res.grCount}}</div>
+    </div>
+    <div class="row">
+      <div class="col-md-4 col-md-offset-8">Sort by:<select ng-model="sortOption" ng-change="changeSort(sortOption)" ng-options="opt.desc for opt in sortOpts"></select></div>
+    </div>
+  </div>
+</div>
+
+<div class="repoInfo">
+  <div class="repo" ng-repeat="item in res.repo">
+    <div class="container-fluid">
+      <div class="row" ng-class="item.from">
+        <div class="col-md-4"><i ng-class="item.icon"></i>{{item.from}}</div>
+        <div class="col-md-8">Last updated: {{item.update | date: 'yyyy-MM-dd'}}</div>
+      </div>
+      <div class="row">
+        <div class="col-md-5"><img class="avatar img-thumbnail" ng-src="{{item.avatar}}"><p>{{item.author}}</p></div>
+        <div class="col-md-7 description">{{item.description}}</div>
+      </div>
+      <div class="row">
+        <div class="col-md-12"><a target="_blank" class="btn-link" ng-href="{{item.url}}">{{item.name}}</a></div>
+      </div>
+    <div>
+  </div>
+</div>

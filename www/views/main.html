@@ -1,0 +1,18 @@
+<div ng-controller="mainCtrl" class="base">
+  <div class="top">
+  </div>
+
+  <div class="title">
+    <h1 class="title-words">repoFinder!</h1>
+    <h4 class="subtitle-words">Search repositories in Github, Bitbucket, Gitorious, etc.</h3>
+  </div>
+
+  <div class="search">
+    <div class="form-inline inline">
+      <input class="form-control searchInput" name="search" ng-model="keyword" placeholder="Hello World!"/>&nbsp;
+      <button type="button" class="btn btn-default" ng-click="doSearch()">Search</button>
+    </div>
+  </div>
+
+  <div class="content" ng-include src="'views/content.html'" ng-init="init()"></div>
+</div>
